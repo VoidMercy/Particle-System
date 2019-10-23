@@ -1,4 +1,3 @@
-
 // Initializations
 var WIDTH = 800;
 var HEIGHT = 600;
@@ -9,7 +8,10 @@ button_url = "http://localhost:8000/button.png";
 snowflake_url = "http://localhost:8000/snowflake.png";
 image_urls = [button_url, snowflake_url];
 
-simulation_status = {"snowflake":false, "rain":false};
+simulation_status = {
+  "snowflake":{running: false, add: add_snowflake},
+  "rain":{running: false, add: add_rain}
+};
 
 particles = [];
 
@@ -33,8 +35,8 @@ function setup() {
   create_menu();
   app.ticker.add(delta => game_loop(delta));
 
-  simulation_status["snowflake"] = true;
-  simulation_status["rain"] = true;
+  simulation_status["snowflake"].running = true;
+  simulation_status["rain"].running = true;
 }
 
 function game_loop() {
@@ -42,17 +44,12 @@ function game_loop() {
   stage.removeChild(game_map);
   gr.clear();
 
-  if (simulation_status["snowflake"]) {
-    var new_particle = add_snowflake();
-    if (new_particle !== 0) {
-      particles.push(new_particle);
-    }
-  }
-
-  if (simulation_status["rain"]) {
-    var new_particle = add_rain();
-    if (new_particle !== 0) {
-      particles.push(new_particle);
+  for (var type in simulation_status) {
+    if (simulation_status[type].running) {
+      var new_particle = simulation_status[type].add();
+      if (new_particle !== 0) {
+        particles.push(new_particle);
+      }
     }
   }
 
