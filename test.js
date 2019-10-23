@@ -13,6 +13,8 @@ simulation_status = {"snowflake":false, "rain":false};
 
 particles = [];
 
+var game_map = new PIXI.Graphics();
+
 //Create a Pixi Application
 var app = new PIXI.Application({width: WIDTH, height: HEIGHT});
 var stage = app.stage;
@@ -32,21 +34,35 @@ function setup() {
   app.ticker.add(delta => game_loop(delta));
 
   simulation_status["snowflake"] = true;
+  simulation_status["rain"] = true;
 }
 
 function game_loop() {
+  var gr = game_map;
+  stage.removeChild(game_map);
+  gr.clear();
+
   if (simulation_status["snowflake"]) {
     var new_particle = add_snowflake();
     if (new_particle !== 0) {
-      stage.addChild(new_particle);
       particles.push(new_particle);
     }
   }
 
-  // Update particles by calling their update functions
+  if (simulation_status["rain"]) {
+    var new_particle = add_rain();
+    if (new_particle !== 0) {
+      particles.push(new_particle);
+    }
+  }
+
+  // Update particles by calling their update and draw functions
   for (var i = 0; i < particles.length; i++) {
     particles[i].update(particles[i]);
+    particles[i].draw(particles[i], gr);
   }
+
+  stage.addChild(gr);
 }
 
 // Create simulation buttons
