@@ -1,6 +1,6 @@
 // Initializations
-var WIDTH = 800;
-var HEIGHT = 600;
+let WIDTH = 800;
+let HEIGHT = 600;
 
 buttons = [];
 
@@ -15,17 +15,17 @@ simulation_status = {
 
 particles = [];
 
-var game_map = new PIXI.Graphics();
+let game_map = new PIXI.Graphics();
 
 //Create a Pixi Application
-var app = new PIXI.Application({width: WIDTH, height: HEIGHT});
-var stage = app.stage;
+let app = new PIXI.Application({width: WIDTH, height: HEIGHT});
+let stage = app.stage;
 
 //Add the canvas that Pixi automatically created for you to the HTML document
 document.body.appendChild(app.view);
 
 // Load images
-for (var i = 0; i < image_urls.length; i++) {
+for (let i = 0; i < image_urls.length; i++) {
   PIXI.Loader.shared.add(image_urls[i]);
 }
 PIXI.Loader.shared.load(setup);
@@ -40,13 +40,13 @@ function setup() {
 }
 
 function game_loop() {
-  var gr = game_map;
+  let gr = game_map;
   stage.removeChild(game_map);
   gr.clear();
 
-  for (var type in simulation_status) {
+  for (let type in simulation_status) {
     if (simulation_status[type].running) {
-      var new_particle = simulation_status[type].add();
+      let new_particle = simulation_status[type].add();
       if (new_particle !== 0) {
         particles.push(new_particle);
       }
@@ -54,7 +54,7 @@ function game_loop() {
   }
 
   // Update particles by calling their update and draw functions
-  for (var i = particles.length - 1; i >= 0; i--) {
+  for (let i = particles.length - 1; i >= 0; i--) {
     particles[i].update(particles[i]);
     particles[i].draw(particles[i], gr);
     if (particles[i].offscreen(particles[i])) {
@@ -67,13 +67,13 @@ function game_loop() {
 
 // Create simulation buttons
 function create_menu() {
-  var BUTTON_COUNT = 3;
-  var BUTTON_WIDTH = 50;
-  var BUTTON_HEIGHT = 50;
+  let BUTTON_COUNT = 3;
+  let BUTTON_WIDTH = 50;
+  let BUTTON_HEIGHT = 50;
 
   for (var i = 0; i < BUTTON_COUNT; i++) {
     // Create button and scale image
-    var button = new PIXI.Sprite(PIXI.Loader.shared.resources[button_url].texture);
+    let button = new PIXI.Sprite(PIXI.Loader.shared.resources[button_url].texture);
     button.scale.x = BUTTON_WIDTH / button.width;
     button.scale.y = BUTTON_HEIGHT / button.height;
     button.x = WIDTH - button.width;

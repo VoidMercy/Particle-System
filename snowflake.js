@@ -1,9 +1,9 @@
-var SNOWFLAKE_PROBABILITY = 0.15;
+let SNOWFLAKE_PROBABILITY = 0.15;
 
 function add_snowflake() {
   mouse_coord = app.renderer.plugins.interaction.mouse.global;
   if (Math.random() < SNOWFLAKE_PROBABILITY) {
-    var temp = new PIXI.Sprite(PIXI.Loader.shared.resources[snowflake_url].texture);
+    let temp = new PIXI.Sprite(PIXI.Loader.shared.resources[snowflake_url].texture);
     temp.x = mouse_coord.x;
     temp.y = mouse_coord.y;
     temp.theta = Math.random() * Math.PI / 3 - 2 * Math.PI / 3;

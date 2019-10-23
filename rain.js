@@ -1,11 +1,11 @@
-RAIN_LENGTH = 20;
-RAIN_VELOCITY = 10;
-RAIN_PROBABILITY = 0.3;
+var RAIN_LENGTH = 20;
+var RAIN_VELOCITY = 10;
+var RAIN_PROBABILITY = 0.3;
 
 function add_rain() {
   mouse_coord = app.renderer.plugins.interaction.mouse.global;
   if (Math.random() < RAIN_PROBABILITY) {
-    var rain = {};
+    let rain = {};
     rain.theta = -70; // testing rain angle
     rain.x = mouse_coord.x;
     rain.y = mouse_coord.y;
@@ -26,16 +26,16 @@ function rain_update(particle) {
 }
 
 function rain_draw(particle, gr) {
-  var dx = Math.cos(particle.theta);
-  var dy = -Math.sin(particle.theta);
+  let dx = Math.cos(particle.theta);
+  let dy = -Math.sin(particle.theta);
 
-  var cur_x = particle.x;
-  var cur_y = particle.y;
+  let cur_x = particle.x;
+  let cur_y = particle.y;
 
   // iterate along path of theta and draw pixels with a color gradient
 
-  for (var count = 0; count < RAIN_LENGTH; count++) {
-    var color = 0xa9 - count * 5;
+  for (let count = 0; count < RAIN_LENGTH; count++) {
+    let color = 0xa9 - count * 5;
     gr.lineStyle(0, 0, 1);
     gr.beginFill(color << 16 | color << 8 | color);
     gr.drawRect(cur_x, cur_y, 1, 1);
