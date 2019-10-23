@@ -13,6 +13,8 @@ function add_snowflake() {
 
     temp.update = snowflake_update;
     temp.draw = snowflake_draw;
+    temp.offscreen = snowflake_offscreen;
+
     stage.addChild(temp);
     return temp;
   }
@@ -25,4 +27,8 @@ function snowflake_update(particle) {
 }
 
 function snowflake_draw(particle, gr) {
+}
+
+function snowflake_offscreen(particle) {
+  return particle.y > HEIGHT + 5;
 }

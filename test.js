@@ -57,9 +57,12 @@ function game_loop() {
   }
 
   // Update particles by calling their update and draw functions
-  for (var i = 0; i < particles.length; i++) {
+  for (var i = particles.length - 1; i >= 0; i--) {
     particles[i].update(particles[i]);
     particles[i].draw(particles[i], gr);
+    if (particles[i].offscreen(particles[i])) {
+      particles.splice(i, 1);
+    }
   }
 
   stage.addChild(gr);

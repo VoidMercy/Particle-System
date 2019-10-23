@@ -9,9 +9,12 @@ function add_rain() {
     rain.theta = -70; // testing rain angle
     rain.x = mouse_coord.x;
     rain.y = mouse_coord.y;
-    rain.update = rain_update;
     rain.v = RAIN_VELOCITY;
+
+    rain.update = rain_update;
     rain.draw = rain_draw;
+    rain.offscreen = rain_offscreen;
+
     return rain;
   }
   return 0;
@@ -41,4 +44,8 @@ function rain_draw(particle, gr) {
     cur_x += dx;
     cur_y += dy;
   }
+}
+
+function rain_offscreen(particle) {
+  return particle.y > HEIGHT + 5;
 }
