@@ -1,3 +1,4 @@
+// Initializations
 particles = [];
 
 let game_map = new PIXI.Graphics();
