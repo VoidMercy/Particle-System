@@ -5,7 +5,7 @@ var MAX_SWARM = 30
 var SWARM_PROBABILITY = 0.3
 var VELOCITY = 4;
 var MOVEMENT_COOLDOWN = 1;
-var LIFESPAN = 15;
+var LIFESPAN = 10;
 
 // Add new swarm particle
 function add_swarm() {
@@ -53,7 +53,7 @@ function swarm_update(swarm) {
 function swarm_draw(swarm, gr) {
   gr.lineStyle(0, 0, 1);
   gr.beginFill(0xffff00);
-  gr.drawRect(swarm.x, swarm.y, 1, 1);
+  gr.drawCircle(swarm.x, swarm.y, 2);
   gr.endFill();
 }
 
