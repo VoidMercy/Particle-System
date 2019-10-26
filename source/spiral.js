@@ -1,6 +1,8 @@
 var current_direction = 0;
 var SPIRAL_VELOCITY = 2;
 var SPIRAL_RADIUS = 5;
+var SPIRAL_PERIOD = 10;
+var SPIRAL_MAX_SPEED = 8;
 
 // Add a spiral particle
 function add_spiral() {
@@ -10,7 +12,7 @@ function add_spiral() {
   spiral.x = mouse_coord.x;
   spiral.y = mouse_coord.y;
   spiral.v = SPIRAL_VELOCITY;
-  spiral.period = 10;
+  spiral.period = SPIRAL_PERIOD;
   spiral.status = 1;
 
   spiral.update = spiral_update;
@@ -31,7 +33,7 @@ function spiral_update(particle) {
     if (particle.status == 1) {
       particle.v++;
       particle.period++;
-      if (particle.v == 8) {
+      if (particle.v == SPIRAL_MAX_SPEED) {
         particle.status = 0;
       }
     } else {
@@ -39,7 +41,7 @@ function spiral_update(particle) {
       particle.period++;
       if (particle.v == SPIRAL_VELOCITY) {
         particle.status = 1;
-        particle.period = 10;
+        particle.period = SPIRAL_PERIOD;
       }
     }
   }
