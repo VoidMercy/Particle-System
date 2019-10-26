@@ -2,7 +2,9 @@
 
 Extensible in-browser 2D javascript particle simulation using PIXI.js.
 
-### Running
+### Running and Dependencies
+
+Python2 is required for serving images locally. WebGL is required for running the simulation.
 
 Images can be served on localhost with proper CORS "Access-Control-Allow-Origin" headers to allow PIXI.js to fetch the images using python Flask. Please run `python serve.py` to start this server.
 
