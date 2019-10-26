@@ -96,7 +96,6 @@ function create_menu() {
     button.interactive = true;
     button.on("click", function() {
       simulation_status[type].running = !simulation_status[type].running;
-      console.log(type);
     });
     stage.addChild(button);
     stage.addChild(button_icon);
