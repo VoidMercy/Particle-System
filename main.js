@@ -68,6 +68,7 @@ function game_loop() {
 function create_menu() {
   let BUTTON_WIDTH = 80;
   let BUTTON_HEIGHT = 80;
+  let BUTTON_IMG_SIZE = 30;
   let BUTTON_IMG_WIDTH = 30;
   let BUTTON_IMG_HEIGHT = 30;
 
@@ -83,6 +84,15 @@ function create_menu() {
     button.y = c * button.height;
 
     let button_img = new PIXI.Sprite(PIXI.Loader.shared.resources[button_img_url].texture);
+
+    if (button_img.width > button_img.height) {
+      BUTTON_IMG_WIDTH = BUTTON_IMG_SIZE;
+      BUTTON_IMG_HEIGHT = BUTTON_IMG_SIZE * button_img.height / button_img.width;
+    } else {
+      BUTTON_IMG_HEIGHT = BUTTON_IMG_SIZE;
+      BUTTON_IMG_WIDTH = BUTTON_IMG_SIZE * button_img.width / button_img.height;
+    }
+
     button_img.scale.x = BUTTON_IMG_WIDTH / button_img.width;
     button_img.scale.y = BUTTON_IMG_HEIGHT / button_img.height;
     button_img.x = WIDTH - BUTTON_WIDTH + (BUTTON_WIDTH - BUTTON_IMG_WIDTH) / 2;
