@@ -10,13 +10,13 @@ Images can be served on localhost with proper CORS "Access-Control-Allow-Origin"
 
 To load the simulation, load `main.html` in a browser that supports WebGL. WebGL is by default enabled on FireFox. To enable WebGL on chrome, make sure hardware acceleration is enabled in settings, and WebGL is enabled in `chrome://flags`
 
-### Adding Simulations
+### Adding/Extending Simulations
 
 1. Add all necessary image urls to `source/config.js`
 2. Add simulation configuration to `source/config.js`
 3. Add javascript source file to `main.html`
 
-### Coding javascript source file
+### Coding Javascript Source File for More Simulations
 
 The `run` function from the simulation configuration is called every tick (60 times a seconds). The return value of this function is expected to be a particle with three attributes: update, draw, and offscreen. The value of these attributes should be functions which will be further described below.
 
