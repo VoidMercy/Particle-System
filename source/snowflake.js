@@ -1,5 +1,8 @@
+// Snowflake particle simulation
+
 let SNOWFLAKE_PROBABILITY = 0.15;
 
+// Add new snowflake particle
 function add_snowflake() {
   mouse_coord = app.renderer.plugins.interaction.mouse.global;
   if (Math.random() < SNOWFLAKE_PROBABILITY) {
@@ -21,14 +24,17 @@ function add_snowflake() {
   return 0;
 }
 
+// Update snowflake particle's position based on angle and velocity
 function snowflake_update(particle) {
   particle.x += Math.cos(particle.theta) * particle.v;
   particle.y -= Math.sin(particle.theta) * particle.v;
 }
 
+// Not necessary to draw snowflake onto grpahics object since snowflake is on PIXI.js stage
 function snowflake_draw(particle, gr) {
 }
 
+// Check is snowflake is on screen
 function snowflake_offscreen(particle) {
   return particle.y > HEIGHT + 5;
 }

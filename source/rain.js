@@ -1,7 +1,10 @@
+// Rain particle simulation
+
 var RAIN_LENGTH = 20;
 var RAIN_VELOCITY = 10;
 var RAIN_PROBABILITY = 0.3;
 
+// Adds new rain particle
 function add_rain() {
   mouse_coord = app.renderer.plugins.interaction.mouse.global;
   if (Math.random() < RAIN_PROBABILITY) {
@@ -20,11 +23,13 @@ function add_rain() {
   return 0;
 }
 
+// Update rain's position based on angle and velocity
 function rain_update(particle) {
   particle.x += Math.cos(particle.theta) * particle.v;
   particle.y -= Math.sin(particle.theta) * particle.v;
 }
 
+// Draw rain particle onto gr grpahics object
 function rain_draw(particle, gr) {
   let dx = Math.cos(particle.theta);
   let dy = -Math.sin(particle.theta);
@@ -33,7 +38,6 @@ function rain_draw(particle, gr) {
   let cur_y = particle.y;
 
   // iterate along path of theta and draw pixels with a color gradient
-
   for (let count = 0; count < RAIN_LENGTH; count++) {
     let color = 0xa9 - count * 5;
     gr.lineStyle(0, 0, 1);
@@ -46,6 +50,7 @@ function rain_draw(particle, gr) {
   }
 }
 
+// Check if rain particle is on screen
 function rain_offscreen(particle) {
   return particle.y > HEIGHT + 5;
 }

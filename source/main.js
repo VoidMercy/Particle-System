@@ -1,3 +1,5 @@
+// Main controller source file
+
 // Initializations
 particles = [];
 
@@ -22,12 +24,15 @@ function setup() {
   app.ticker.add(delta => main_loop(delta));
 }
 
+// Main loop which is called 60 ticks per second
+// delta: delta time between last call of main_loop
 function main_loop(delta) {
   if (running) {
     let gr = game_map;
     stage.removeChild(game_map);
     gr.clear();
 
+    // Add new particles by calling each respective run functions
     for (let type in simulation_status) {
       if (simulation_status[type].running) {
         let new_particle = simulation_status[type].run();
@@ -73,7 +78,7 @@ function create_menu() {
 
     let button_icon = new PIXI.Sprite(PIXI.Loader.shared.resources[button_icon_url].texture);
 
-    // maintain button icon aspect ratio
+    // Maintain button icon aspect ratio
     if (button_icon.width > button_icon.height) {
       BUTTON_ICON_WIDTH = BUTTON_ICON_SIZE;
       BUTTON_ICON_HEIGHT = BUTTON_ICON_SIZE * button_icon.height / button_icon.width;
@@ -99,7 +104,7 @@ function create_menu() {
     c += 1;
   }
 
-  // create pause and play buttons
+  // Create pause and play buttons
   button = new PIXI.Sprite(PIXI.Loader.shared.resources[play_url].texture);
   button.scale.x = PLAY_PAUSE_SIZE / button.width;
   button.scale.y = PLAY_PAUSE_SIZE / button.height;
@@ -123,6 +128,5 @@ function create_menu() {
   });
 
   stage.addChild(button);
-
 }
 

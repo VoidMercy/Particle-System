@@ -1,3 +1,5 @@
+// Swarm particle simulation
+
 var swarm_count = 0;
 var MAX_SWARM = 30
 var SWARM_PROBABILITY = 0.3
@@ -5,6 +7,7 @@ var VELOCITY = 4;
 var MOVEMENT_COOLDOWN = 1;
 var LIFESPAN = 15;
 
+// Add new swarm particle
 function add_swarm() {
   mouse_coord = app.renderer.plugins.interaction.mouse.global;
   if (swarm_count < MAX_SWARM && Math.random() < SWARM_PROBABILITY) {
@@ -24,6 +27,7 @@ function add_swarm() {
   return 0;
 }
 
+// Update swarm particle's position to follow mouse cursor
 function swarm_update(swarm) {
   swarm.lifespan -= 1;
 
@@ -45,6 +49,7 @@ function swarm_update(swarm) {
   }
 }
 
+// Draw swarm particle on graphics object as a single pixel
 function swarm_draw(swarm, gr) {
   gr.lineStyle(0, 0, 1);
   gr.beginFill(0xffff00);
@@ -52,6 +57,7 @@ function swarm_draw(swarm, gr) {
   gr.endFill();
 }
 
+// Kill the swarm particle after its lifespan ticks to 0
 function swarm_offscreen(swarm) {
   return swarm.lifespan == 0;
 }

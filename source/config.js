@@ -1,3 +1,5 @@
+// Configuration file to add more simulations
+
 let WIDTH = 800;
 let HEIGHT = 600;
 let running = true;
