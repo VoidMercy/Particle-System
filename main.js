@@ -2,11 +2,9 @@
 let WIDTH = 800;
 let HEIGHT = 600;
 
-buttons = [];
-
 button_url = "http://localhost:8000/button.png";
 snowflake_url = "http://localhost:8000/snowflake.png";
-raindrop_url  = "http://localhost:8000/raindrop.jpg";
+raindrop_url  = "http://localhost:8000/raindrop.png";
 bee_url  = "http://localhost:8000/bee.png";
 image_urls = [button_url, snowflake_url, raindrop_url, bee_url];
 
@@ -37,10 +35,6 @@ PIXI.Loader.shared.load(setup);
 function setup() {
   create_menu();
   app.ticker.add(delta => game_loop(delta));
-
-  //simulation_status["snowflake"].running = true;
-  //simulation_status["rain"].running = true;
-  simulation_status["swarm"].running = true;
 }
 
 function game_loop() {
@@ -72,20 +66,27 @@ function game_loop() {
 
 // Create simulation buttons
 function create_menu() {
-  let BUTTON_COUNT = 3;
-  let BUTTON_WIDTH = 50;
-  let BUTTON_HEIGHT = 50;
+  let BUTTON_WIDTH = 80;
+  let BUTTON_HEIGHT = 80;
+  let BUTTON_IMG_WIDTH = 30;
+  let BUTTON_IMG_HEIGHT = 30;
 
   var c = 0;
 
   for (let type in simulation_status) {
     // Create button and scale image
     let button_img_url = simulation_status[type].button;
-    let button = new PIXI.Sprite(PIXI.Loader.shared.resources[button_img_url].texture);
+    let button = new PIXI.Sprite(PIXI.Loader.shared.resources[button_url].texture);
     button.scale.x = BUTTON_WIDTH / button.width;
     button.scale.y = BUTTON_HEIGHT / button.height;
     button.x = WIDTH - button.width;
     button.y = c * button.height;
+
+    let button_img = new PIXI.Sprite(PIXI.Loader.shared.resources[button_img_url].texture);
+    button_img.scale.x = BUTTON_IMG_WIDTH / button_img.width;
+    button_img.scale.y = BUTTON_IMG_HEIGHT / button_img.height;
+    button_img.x = WIDTH - BUTTON_WIDTH + (BUTTON_WIDTH - BUTTON_IMG_WIDTH) / 2;
+    button_img.y = c * button.height + (BUTTON_HEIGHT - BUTTON_IMG_HEIGHT) / 2;
 
     // Add button listener events
     button.interactive = true;
@@ -94,13 +95,9 @@ function create_menu() {
       console.log(type);
     });
     stage.addChild(button);
+    stage.addChild(button_img);
 
-    buttons.push(button);
     c += 1;
   }
-}
-
-function test_click() {
-  console.log("CLICKED");
 }
 
