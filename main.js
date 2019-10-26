@@ -6,12 +6,14 @@ buttons = [];
 
 button_url = "http://localhost:8000/button.png";
 snowflake_url = "http://localhost:8000/snowflake.png";
-image_urls = [button_url, snowflake_url];
+raindrop_url  = "http://localhost:8000/raindrop.jpg";
+bee_url  = "http://localhost:8000/bee.png";
+image_urls = [button_url, snowflake_url, raindrop_url, bee_url];
 
 simulation_status = {
-  "snowflake":{running: false, run: add_snowflake},
-  "rain":{running: false, run: add_rain},
-  "swarm":{running: false, run: add_swarm}
+  "snowflake":{running: false, run: add_snowflake, button: snowflake_url},
+  "rain":{running: false, run: add_rain, button: raindrop_url},
+  "swarm":{running: false, run: add_swarm, button: bee_url}
 };
 
 particles = [];
@@ -74,20 +76,27 @@ function create_menu() {
   let BUTTON_WIDTH = 50;
   let BUTTON_HEIGHT = 50;
 
-  for (var i = 0; i < BUTTON_COUNT; i++) {
+  var c = 0;
+
+  for (let type in simulation_status) {
     // Create button and scale image
-    let button = new PIXI.Sprite(PIXI.Loader.shared.resources[button_url].texture);
+    let button_img_url = simulation_status[type].button;
+    let button = new PIXI.Sprite(PIXI.Loader.shared.resources[button_img_url].texture);
     button.scale.x = BUTTON_WIDTH / button.width;
     button.scale.y = BUTTON_HEIGHT / button.height;
     button.x = WIDTH - button.width;
-    button.y = i * button.height;
+    button.y = c * button.height;
 
     // Add button listener events
     button.interactive = true;
-    button.on("click", test_click);
+    button.on("click", function() {
+      simulation_status[type].running = !simulation_status[type].running;
+      console.log(type);
+    });
     stage.addChild(button);
 
     buttons.push(button);
+    c += 1;
   }
 }
 
